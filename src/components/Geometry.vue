@@ -11,18 +11,18 @@
         :y-intercept="yIntercept === '' ? 0 : yIntercept"
       ></geometry-canvas>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <button class="btn btn-danger w-100 mb-2" @click="resetEverything">Reset</button>
-      <div class="row">
-        <div class="col-6">
-          <div>
-            <div class="mb-1 pt-1 font-weight-bold">Move</div>
-            <action-button icon="arrow-up" caption="Up" @click="moveUp"></action-button>
-            <action-button icon="arrow-down" caption="Down" @click="moveDown"></action-button>
-            <action-button icon="arrow-right" caption="Right" @click="moveRight"></action-button>
-            <action-button icon="arrow-left" caption="Left" @click="moveLeft"></action-button>
-          </div>
 
+      <b-tabs>
+        <b-tab title="Move" class="mt-2">
+          <action-button icon="arrow-up" caption="Up" @click="moveUp"></action-button>
+          <action-button icon="arrow-down" caption="Down" @click="moveDown"></action-button>
+          <action-button icon="arrow-right" caption="Right" @click="moveRight"></action-button>
+          <action-button icon="arrow-left" caption="Left" @click="moveLeft"></action-button>
+        </b-tab>
+
+        <b-tab title="Rotate">
           <div>
             <div class="mb-1 pt-1 font-weight-bold">Rotate around rectangle center</div>
             <action-button icon="rotate-right" caption="Clockwise" color="success" @click="rotateCenterClockwise"></action-button>
@@ -53,7 +53,9 @@
               </div>
             </div>
           </div>
+        </b-tab>
 
+        <b-tab title="Stretch & Shear">
           <div>
             <div class="mb-1 pt-1 font-weight-bold">Stretch and contract</div>
             <action-button icon="arrow-left" second-icon="arrow-right" caption="Stretch X" color="secondary" @click="stretchX"></action-button>
@@ -61,9 +63,7 @@
             <action-button icon="arrow-up" second-icon="arrow-down" caption="Stretch Y" color="secondary" @click="stretchY"></action-button>
             <action-button icon="arrow-down" second-icon="arrow-up" caption="Contract Y" color="secondary" @click="contractY"></action-button>
           </div>
-        </div>
 
-        <div class="col-6">
           <div>
             <div class="mb-1 pt-1 font-weight-bold">Shear</div>
             <action-button icon="arrow-right" caption="Top to right" color="info" @click="shearTopToRight"></action-button>
@@ -71,7 +71,9 @@
             <action-button icon="arrow-up" caption="Right to top" color="info" @click="shearRightToTop"></action-button>
             <action-button icon="arrow-down" caption="Right to bottom" color="info" @click="shearRightToBottom"></action-button>
           </div>
+        </b-tab>
 
+        <b-tab title="Mirror & Projection">
           <div>
             <div class="mb-1 pt-1 font-weight-bold">Mirror on line</div>
             <div>a∙x + b∙y + c = 0</div>
@@ -96,23 +98,6 @@
             <action-button icon="arrow-right" caption="Mirror" color="primary" @click="mirror"></action-button>
           </div>
 
-          <div>
-            <div class="mb-1 pt-1 font-weight-bold">Camera</div>
-            <div class="form-group row">
-              <label for="y" class="col-sm-2 col-form-label">x:</label>
-              <div class="col-sm-10">
-                <input type="number" step="5" class="form-control form-control-sm" id="x" :value="camera.x" @input="updateCamera">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="y" class="col-sm-2 col-form-label">y:</label>
-              <div class="col-sm-10">
-                <input type="number" step="5" class="form-control form-control-sm" id="y" :value="camera.y" @input="updateCamera">
-              </div>
-            </div>
-            <label for="rotation">Rotation:</label>
-            <input type="number" step="5" class="form-control form-control-sm" id="rotation" :value="camera.rotation" @input="updateCamera">
-          </div>
           <div class="mt-1">
             <div class="mb-1 pt-1 font-weight-bold">Perspective projection</div>
             <label for="xIntercept">x intercept:</label>
@@ -121,8 +106,24 @@
             <input type="number" step="5" class="form-control form-control-sm" id="yIntercept" v-model.number="yIntercept">
             <action-button class="mt-3" icon="video-camera" caption="Project" color="danger" @click="perspectiveProjection"></action-button>
           </div>
-        </div>
-      </div>
+        </b-tab>
+        <b-tab title="Camera"class="mt-2">
+          <div class="form-group row">
+            <label for="y" class="col-sm-2 col-form-label">x:</label>
+            <div class="col-sm-10">
+              <input type="number" step="5" class="form-control form-control-sm" id="x" :value="camera.x" @input="updateCamera">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="y" class="col-sm-2 col-form-label">y:</label>
+            <div class="col-sm-10">
+              <input type="number" step="5" class="form-control form-control-sm" id="y" :value="camera.y" @input="updateCamera">
+            </div>
+          </div>
+          <label for="rotation">Rotation:</label>
+          <input type="number" step="5" class="form-control form-control-sm" id="rotation" :value="camera.rotation" @input="updateCamera">
+        </b-tab>
+      </b-tabs>
     </div>
   </div>
 </template>

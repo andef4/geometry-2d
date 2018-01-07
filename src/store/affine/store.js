@@ -5,7 +5,7 @@ import {
 
 import { addPrefix } from '../utils'
 
-export let actions = addPrefix('', {
+export let actions = addPrefix('affine', {
   moveUp ({commit}) {
     commit('addVector', { x: 0, y: 25 })
   },
