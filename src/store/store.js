@@ -58,6 +58,13 @@ const initialState = () => {
   }
 }
 
+function addPrefix (prefix, obj) {
+  const keyValues = Object.keys(obj).map(key => {
+    return { [prefix + key]: obj[key] }
+  })
+  return Object.assign({}, ...keyValues)
+}
+
 export default new Vuex.Store({
   state: initialState(),
   getters: {
@@ -72,10 +79,10 @@ export default new Vuex.Store({
   },
   actions: {
     ...homogeneousGlobalActions,
-    ...homogeneousActions,
+    ...addPrefix('homogeneous', homogeneousActions),
     ...affineGlobalActions,
-    ...affineActions,
-    ...complexActions,
+    ...addPrefix('affine', affineActions),
+    ...addPrefix('complex', complexActions),
     moveUp ({ state, dispatch }) {
       dispatch(state.currentImplementation + 'moveUp')
     },

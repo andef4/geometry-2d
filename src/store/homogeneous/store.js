@@ -2,9 +2,8 @@ import {
   translationMatrix, rotationMatrix, matricesMultiplication3x3, applyMatrixToVector, shearMatrixX, shearMatrixY,
   stretchMatrixX, stretchMatrixY, mirrorMatrix, perspectiveProjectionMatrix
 } from './math'
-import { addPrefix } from '../utils'
 
-export let unprefixedActions = {
+export let actions = {
   moveUp ({commit}) {
     let matrix = translationMatrix(0, 25)
     commit('applyMatrix3h', {matrix})
@@ -94,8 +93,6 @@ export let unprefixedActions = {
     commit('applyMatrix3h', { matrix })
   }
 }
-
-export let actions = addPrefix('homogeneous', unprefixedActions)
 
 export let globalActions = {
   perspectiveProjection ({commit}, {xIntercept, yIntercept}) {

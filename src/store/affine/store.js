@@ -3,9 +3,7 @@ import {
   stretchMatrixX, stretchMatrixY
 } from './math'
 
-import { addPrefix } from '../utils'
-
-export let actions = addPrefix('affine', {
+export let actions = {
   moveUp ({commit}) {
     commit('addVector', { x: 0, y: 25 })
   },
@@ -83,7 +81,7 @@ export let actions = addPrefix('affine', {
     commit('applyMatrix2a', { matrix: mirrorMatrix(Math.atan(aNorm)) })
     commit('addVector', {x: 0, y: bNorm})
   }
-})
+}
 
 export let globalActions = {
   applyMatrixCenter2a ({ commit, getters }, { matrix }) {

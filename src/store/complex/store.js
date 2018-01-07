@@ -1,11 +1,10 @@
 import {
-  unprefixedActions as homogeneousActions
+  actions as homogeneousActions
 } from '../homogeneous/store'
 
 import { complexMultiplication, complexRotation } from './math'
-import { addPrefix } from '../utils'
 
-export let actions = addPrefix('complex', {
+export let actions = {
   ...homogeneousActions,
   rotateCenterClockwise ({ commit, getters }) {
     let center = getters.center
@@ -41,7 +40,7 @@ export let actions = addPrefix('complex', {
     commit('applyComplex', { complex })
     commit('addVector', { x: x, y: y })
   }
-})
+}
 
 export let mutations = {
   applyComplex (state, { complex }) {
