@@ -5,7 +5,7 @@ import {
 import { complexMultiplication, complexRotation } from './math'
 import { addPrefix } from '../utils'
 
-export let actions = addPrefix('', {
+export let actions = addPrefix('complex', {
   ...homogeneousActions,
   rotateCenterClockwise ({ commit, getters }) {
     let center = getters.center

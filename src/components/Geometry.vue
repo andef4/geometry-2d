@@ -14,6 +14,14 @@
     <div class="col-3">
       <button class="btn btn-danger w-100 mb-2" @click="resetEverything">Reset</button>
 
+      <b-form-group label="Implementations:">
+        <b-form-radio-group :checked="currentImplementation"
+                            @input="setImplementation"
+                            :options="implementations"
+                            stacked>
+        </b-form-radio-group>
+      </b-form-group>
+
       <b-tabs>
         <b-tab title="Move" class="mt-2">
           <action-button icon="arrow-up" caption="Up" @click="moveUp"></action-button>
@@ -163,7 +171,7 @@
       GeometryCanvas
     },
     computed: {
-      ...mapState(['coordinates', 'camera'])
+      ...mapState(['coordinates', 'camera', 'implementations', 'currentImplementation'])
     },
     methods: {
       ...mapActions([
@@ -172,7 +180,7 @@
         'stretchX', 'contractX', 'stretchY', 'contractY', 'shearTopToRight', 'shearTopToLeft', 'shearRightToTop',
         'shearRightToBottom'
       ]),
-      ...mapMutations(['reset']),
+      ...mapMutations(['reset', 'setImplementation']),
       rotatePointClockwise () {
         this.$store.dispatch('rotatePointClockwise', { x: this.m1, y: this.m2 })
       },

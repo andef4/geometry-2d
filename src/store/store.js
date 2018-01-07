@@ -48,7 +48,13 @@ const initialState = () => {
       x: 270,
       y: -240,
       rotation: 20
-    }
+    },
+    currentImplementation: 'affine',
+    implementations: [
+        { text: 'Affine', value: 'affine' },
+        { text: 'Homogeneous', value: 'homogeneous' },
+        { text: 'Complex numbers', value: 'complex' }
+    ]
   }
 }
 
@@ -69,7 +75,64 @@ export default new Vuex.Store({
     ...homogeneousActions,
     ...affineGlobalActions,
     ...affineActions,
-    ...complexActions
+    ...complexActions,
+    moveUp ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'moveUp')
+    },
+    moveDown ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'moveDown')
+    },
+    moveLeft ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'moveLeft')
+    },
+    moveRight ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'moveRight')
+    },
+    rotateCenterClockwise ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'rotateCenterClockwise')
+    },
+    rotateCenterCounterClockwise ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'rotateCenterCounterClockwise')
+    },
+    rotateOriginClockwise ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'rotateOriginClockwise')
+    },
+    rotateOriginCounterClockwise ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'rotateOriginCounterClockwise')
+    },
+    rotatePointClockwise ({ state, dispatch }, param) {
+      dispatch(state.currentImplementation + 'rotatePointClockwise', param)
+    },
+    rotatePointCounterClockwise ({ state, dispatch }, param) {
+      dispatch(state.currentImplementation + 'rotatePointCounterClockwise', param)
+    },
+    stretchX ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'stretchX')
+    },
+    contractX ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'contractX')
+    },
+    stretchY ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'stretchY')
+    },
+    contractY ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'contractY')
+    },
+    shearTopToRight ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'shearTopToRight')
+    },
+    shearTopToLeft ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'shearTopToLeft')
+    },
+    shearRightToTop ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'shearRightToTop')
+    },
+    shearRightToBottom ({ state, dispatch }) {
+      dispatch(state.currentImplementation + 'shearRightToBottom')
+    },
+    mirror ({ state, dispatch }, param) {
+      dispatch(state.currentImplementation + 'mirror', param)
+    }
   },
   mutations: {
     ...affineMutations,
@@ -81,6 +144,10 @@ export default new Vuex.Store({
     },
     updateCamera (state, camera) {
       Object.assign(state.camera, camera)
+    },
+
+    setImplementation (state, implementation) {
+      state.currentImplementation = implementation
     }
   },
   strict: debug
