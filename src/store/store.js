@@ -1,11 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { actions, mutations } from './homogeneous/store'
-// import { actions, mutations } from './complex/store'
+import {
+  actions as homogeneousActions,
+  globalActions as homogeneousGlobalActions,
+  mutations as homogeneousMutations
+} from './homogeneous/store'
 
-// attention: perspective projection does not work on affine implementation
-// import { actions, mutations } from './affine/store'
+import {
+  actions as affineActions,
+  globalActions as affineGlobalActions,
+  mutations as affineMutations
+} from './affine/store'
+
+import {
+  actions as complexActions,
+  mutations as complexMutations
+} from './complex/store'
 
 import camera, { xyRotationToUV } from './camera'
 
@@ -53,9 +64,18 @@ export default new Vuex.Store({
     cameraImage: camera,
     uv: xyRotationToUV
   },
-  actions: actions,
+  actions: {
+    ...homogeneousGlobalActions,
+    ...homogeneousActions,
+    ...affineGlobalActions,
+    ...affineActions,
+    ...complexActions
+  },
   mutations: {
-    ...mutations,
+    ...affineMutations,
+    ...homogeneousMutations,
+    ...complexMutations,
+
     reset (state) {
       Object.assign(state, initialState())
     },
